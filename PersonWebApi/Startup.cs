@@ -35,8 +35,9 @@ namespace PersonWebApi
         {
             services.AddDbContext<PersonDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("PersonDB"));
+                options.UseSqlServer(Configuration.GetConnectionString("PersonDB"));   
             });
+
             services.AddScoped<IPersonBLL, PersonBLL>();
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddControllers();
@@ -44,10 +45,12 @@ namespace PersonWebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PersonWebApi", Version = "v1" });
             });
+            services.AddHttpClient();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PersonDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -55,6 +58,7 @@ namespace PersonWebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PersonWebApi v1"));
             }
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseHttpsRedirection();
 
@@ -66,6 +70,8 @@ namespace PersonWebApi
             {
                 endpoints.MapControllers();
             });
+
+            context.Database.EnsureCreated();
         }
     }
 }

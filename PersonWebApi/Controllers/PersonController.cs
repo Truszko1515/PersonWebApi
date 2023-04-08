@@ -6,18 +6,24 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace PersonWebApi.Controllers
 {
     [ApiController]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Consumes(MediaTypeNames.Application.Json)]
     [Route("[controller]")]
     public sealed class PersonController : ControllerBase
     {
         private readonly IPersonBLL _personBLL;
-        public PersonController(IPersonBLL personBLL)
+        private readonly IHttpClientFactory _httpClientFactory;
+        public PersonController(IPersonBLL personBLL, IHttpClientFactory httpClientFactory)
         {
             _personBLL = personBLL;
+            _httpClientFactory = httpClientFactory;
         }
 
         /// <summary>
@@ -89,6 +95,17 @@ namespace PersonWebApi.Controllers
         {
             await _personBLL.UpdatePersonAsync(id, personModel);
             return NoContent();
+        }
+
+        [HttpGet("Pogoda")]
+        public async Task TestRequestu()
+        {
+            var httpClient = _httpClientFactory.CreateClient("Pogoda");
+            var httpResponseMessage = await httpClient.GetAsync(
+                "https://jsonplaceholder.typicode.com/posts/1");
+
+            var contentStream = await httpResponseMessage.Content.ReadAsStringAsync();
+
         }
 
     }
