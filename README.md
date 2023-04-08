@@ -8,4 +8,5 @@ Application uses Swagger.
 
 
 
+Libraries: 
 ![image](https://user-images.githubusercontent.com/80724133/230726482-7fbfb3cd-ed51-4039-b8b8-28ddebba5dda.png)
