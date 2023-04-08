@@ -3,8 +3,7 @@ PROJECT DESCRIPTION: This is an API project with a database layer that provides 
 
 INSTALLATION: To install the application, you need to have SQL Server Management Studio! (at least version 18.10) installed. If you are running the application in Visual Studio, the required libraries will be downloaded automatically during the compilation process. However, if you are not using Visual Studio, you will need to download the necessary libraries  yourself, which are listed at the end of documentation.
 
-
-HOW TO USE: 
+Application uses Swagger.
 
 
 
