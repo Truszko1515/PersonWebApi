@@ -6,14 +6,7 @@ INSTALLATION: To install the application, you need to have SQL Server Management
 Application uses Swagger.
 
 
+If you are using an environment other than Visual Studio, make sure you have the listed below libraries installed.
 
 
-
-
-
-
-Libraries: 
-
-
-
-![image](https://user-images.githubusercontent.com/80724133/230726482-7fbfb3cd-ed51-4039-b8b8-28ddebba5dda.png)
+![image](https://user-images.githubusercontent.com/80724133/230727721-b439a10a-2a7e-452f-b4c4-7ba8e1fe8c0e.png)
